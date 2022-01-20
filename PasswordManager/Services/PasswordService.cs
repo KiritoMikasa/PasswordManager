@@ -1,22 +1,42 @@
-﻿namespace PasswordManager.Services
+namespace PasswordManager.Services
 {
     using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using Microsoft.Extensions.Configuration;
-    using Newtonsoft.Json;
     using PasswordManager.Models;
 
-    public class PasswordService
+    class PasswordService : IPasswordService
     {
-        private readonly IConfiguration _settings;
 
-        public PasswordService(IConfiguration settings)
+        private readonly FileService _fileService;
+
+        public PasswordService(FileService fileService)
         {
-            this._settings = settings;
+            _fileService = fileService;
+        }
+
+        public void Run(User user)
+        {
+            Console.WriteLine("{0} {1} {2}", user.EncryptionKey, user.PersonalData.FirstName, user.PersonalData.LastName);
+            
+            // @ToDo get passwords from user and try to encrypt with key 
+            // if encryption false
+            // -> "der key ist leider nicht richtig bitte anderen angeben" ask for key again;
+            
+            // if encryption true
+            
+            var url = Console.ReadLine();
+            // @ToDo get url string with password
+            // if url false
+            // -> create new entry ... ark for password
+            _fileService.Write("passwords");
+
+            // if url true
+            // @ToDo copy password into clipboard
+            Console.WriteLine("password kopiert");
+            
+            
         }
         
-        public void Run()
+        /*public void Run()
         {
             string serviceSection = _settings.GetValue<string>("AuthKey");
             Console.WriteLine(serviceSection);
@@ -84,6 +104,6 @@
             {
                 sw.WriteLine(convertedJson);
             };
-        }
+        }*/
     }
 }

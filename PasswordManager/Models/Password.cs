@@ -1,13 +1,8 @@
-namespace PasswordManager.Models
-{
-    using System.Text.Json.Serialization;
+namespace PasswordManager.Models;
 
-    public class Password
-    {
-        public string Id { get; set; }
-        
-        public string UserLogin { get; set; }
-        
-        public string UserPassword { get; set; }
-    }
+public class Password
+{
+    public string Url { get; set; }
+    
+    public string Key { get; set; }
 }
